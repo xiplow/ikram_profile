@@ -54,8 +54,8 @@ function simpan(){
   let nama = document.getElementById("nama").value;
   let universitas = document.getElementById("universitas").value;
   let hobi = document.getElementById("hobi").value;
-  let makanan_kesukaan = document.getElementById("Makanan_Kesukaan").value;
-  let fun_fact = document.getElementById("Fun_Fact").value;
+  let makanan_kesukaan = document.getElementById("makanan_kesukaan").value; // ✅ Fix
+  let fun_fact = document.getElementById("fun_fact").value; // ✅ Fix
   let file = document.getElementById("foto").files[0];
   let indexEdit = document.getElementById("indexEdit").value;
 
@@ -71,16 +71,16 @@ function simpan(){
 
   function saveData(foto){
     if(indexEdit === ""){
-      data.push({nama, universitas, hobi, makanan_favorit, fun_fact, foto});
+      data.push({nama, universitas, hobi, makanan_kesukaan, fun_fact, foto}); // ✅ Fix
     } else {
       if(foto){
-        data[indexEdit] = {nama, universitas, hobi, makanan_favorit, fun_fact, foto};
+        data[indexEdit] = {nama, universitas, hobi, makanan_kesukaan, fun_fact, foto}; // ✅ Fix
       } else {
-        data[indexEdit].nama = Nama;
-        data[indexEdit].universitas = Universitas;
-        data[indexEdit].hobi = Hobi;
-        data[indexEdit].makanan_favorit = Makanan Favorit;
-        data[indexEdit].fun_fact = Fun Fact;
+        data[indexEdit].nama = nama;
+        data[indexEdit].universitas = universitas;
+        data[indexEdit].hobi = hobi;
+        data[indexEdit].makanan_kesukaan = makanan_kesukaan; // ✅ Fix
+        data[indexEdit].fun_fact = fun_fact; // ✅ Fix
       }
     }
 
@@ -92,35 +92,21 @@ function simpan(){
 
 function edit(index){
   document.getElementById("indexEdit").value = index;
-  document.getElementById("Nama").value = data[index].nama;
-  document.getElementById("Universitas").value = data[index].universitas;
-  document.getElementById("Hobi").value = data[index].hobi;
-  document.getElementById("Makanan Favorit").value = data[index].makanan_favorit;
-  document.getElementById("Fun Fact").value = data[index].makanan_favorit;
-}
-
-function hapus(index){
-  if(confirm("Yakin mau hapus?")){
-    data.splice(index,1);
-    localStorage.setItem("orang", JSON.stringify(data));
-    tampil();
-  }
-}
-
-function lihat(index){
-  localStorage.setItem("detail", index);
-  window.location.href = "profil.html";
+  document.getElementById("nama").value = data[index].nama; // ✅ Fix
+  document.getElementById("universitas").value = data[index].universitas; // ✅ Fix
+  document.getElementById("hobi").value = data[index].hobi; // ✅ Fix
+  document.getElementById("makanan_kesukaan").value = data[index].makanan_kesukaan; // ✅ Fix
+  document.getElementById("fun_fact").value = data[index].fun_fact; // ✅ Fix
 }
 
 function resetForm(){
   document.getElementById("indexEdit").value = "";
-  document.getElementById("Nama").value = "";
-  document.getElementById("Universitas").value = "";
-  document.getElementById("Hobi").value = "";
-  document.getElementById("Makanan Favorit").value = "";
-  document.getElementById("Fun Fact").value = "";
+  document.getElementById("nama").value = "";
+  document.getElementById("universitas").value = "";
+  document.getElementById("hobi").value = "";
+  document.getElementById("makanan_kesukaan").value = "";
+  document.getElementById("fun_fact").value = "";
 }
-
 tampil();
 </script>
 
