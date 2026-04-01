@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Profil</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="center">
+
+<div class="card">
+  <h2 id="nama"></h2>
+
+  <div class="list-card" onclick="show('skill')">💻 Skill</div>
+  <div class="list-card" onclick="show('hobi')">🎯 Hobi</div>
+
+  <button onclick="kembali()">Kembali</button>
+</div>
+
+<!-- POPUP -->
+<div id="popup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); justify-content:center; align-items:center;">
+  <div class="card">
+    <h3 id="title"></h3>
+    <p id="isi"></p>
+    <button onclick="closePopup()">Tutup</button>
+  </div>
+</div>
+
+<script>
+let data = JSON.parse(localStorage.getItem("orang"));
+let index = localStorage.getItem("detail");
+
+document.getElementById("nama").innerHTML = data[index].nama;
+
+function show(type){
+  let title="", isi="";
+
+  if(type=="skill"){
+    title="💻 Skill";
+    isi=data[index].skill;
+  }
+  if(type=="hobi"){
+    title="🎯 Hobi";
+    isi=data[index].hobi;
+  }
+
+  document.getElementById("title").innerHTML = title;
+  document.getElementById("isi").innerHTML = isi;
+  document.getElementById("popup").style.display = "flex";
+}
+
+function closePopup(){
+  document.getElementById("popup").style.display = "none";
+}
+
+function kembali(){
+  window.location.href = "dashboard.html";
+}
+</script>
+
+</body>
+</html>
