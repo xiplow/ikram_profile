@@ -2,45 +2,32 @@
 <html>
 <head>
   <title>Dashboard</title>
-  <style>
-    body {
-      font-family: Arial;
-      background:#f5f5f5;
-      padding:20px;
-    }
-
-    input {
-      padding:8px;
-      margin:5px;
-    }
-
-    button {
-      padding:8px 15px;
-      cursor:pointer;
-    }
-
-    .card {
-      background:white;
-      padding:10px;
-      margin:10px 0;
-      border-radius:10px;
-      cursor:pointer;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h2>Tambah Data Orang</h2>
+<div class="center" style="flex-direction: column;">
 
-<input type="text" id="nama" placeholder="Nama">
-<input type="text" id="hobi" placeholder="Hobi">
-<input type="text" id="makanan kesukaan" placeholder="Makanan Kesukaan">
-<input type="text" id="fun fact" placeholder="Fun Fact">
-<button onclick="tambah()">Tambah</button>
+  <div class="card">
+    <h2>➕ Tambah / Edit Data</h2>
 
-<h2>Daftar Orang</h2>
-<div id="list"></div>
+    <input type="hidden" id="indexEdit">
+
+    <input type="text" id="nama" placeholder="Nama"><br>
+    <input type="text" id="universitas" placeholder="Universitas"><br>
+    <input type="text" id="hobi" placeholder="Hobi"><br>
+    <input type="text" id="makanan kesukaan" placeholder="Makanan Kesukaan"><br>
+    <input type="text" id="fun fact" placeholder="Fun Fact"><br>
+    <input type="file" id="foto"><br>
+
+    <button onclick="simpan()">Simpan</button>
+  </div>
+
+  <h2>👥 Daftar Orang</h2>
+  <div id="list"></div>
+
+</div>
 
 <script>
 let data = JSON.parse(localStorage.getItem("orang")) || [];
@@ -51,28 +38,87 @@ function tampil(){
 
   data.forEach((item,index)=>{
     list.innerHTML += `
-      <div class="card" onclick="lihat(${index})">
-        ${item.nama}
+      <div class="list-card">
+        <img src="${item.foto}" width="50" style="border-radius:50%">
+        👤 ${item.nama}
+        <br>
+        <button onclick="edit(${index})">Edit</button>
+        <button onclick="hapus(${index})">Hapus</button>
+        <button onclick="lihat(${index})">Lihat</button>
       </div>
     `;
   });
 }
 
-function tambah(){
+function simpan(){
   let nama = document.getElementById("nama").value;
-  let skill = document.getElementById("hobi").value;
-  let hobi = document.getElementById("makanan kesukaan").value;
-  let hobi = document.getElementById("fun fact").value;  
+  let universitas = document.getElementById("universitas").value;
+  let hobi = document.getElementById("hobi").value;
+  let makanan_kesukaan = document.getElementById("makanan kesukaan").value;
+  let fun_fact = document.getElementById("fun fact").value;
+  let file = document.getElementById("foto").files[0];
+  let indexEdit = document.getElementById("indexEdit").value;
 
-  data.push({nama, skill, hobi});
-  localStorage.setItem("orang", JSON.stringify(data));
+  if(file){
+    let reader = new FileReader();
+    reader.onload = function(e){
+      saveData(e.target.result);
+    }
+    reader.readAsDataURL(file);
+  } else {
+    saveData(null);
+  }
 
-  tampil();
+  function saveData(foto){
+    if(indexEdit === ""){
+      data.push({nama, universitas, hobi, makanan_favorit, fun_fact, foto});
+    } else {
+      if(foto){
+        data[indexEdit] = {nama, universitas, hobi, makanan_favorit, fun_fact, foto};
+      } else {
+        data[indexEdit].nama = nama;
+        data[indexEdit].universitas = universitas;
+        data[indexEdit].hobi = hobi;
+        data[indexEdit].makanan_favorit = makanan favorit;
+        data[indexEdit].fun_fact = fun fact;
+      }
+    }
+
+    localStorage.setItem("orang", JSON.stringify(data));
+    resetForm();
+    tampil();
+  }
+}
+
+function edit(index){
+  document.getElementById("indexEdit").value = index;
+  document.getElementById("nama").value = data[index].nama;
+  document.getElementById("universitas").value = data[index].universitas;
+  document.getElementById("hobi").value = data[index].hobi;
+  document.getElementById("makanan favorit").value = data[index].makanan_favorit;
+  document.getElementById("fun fact").value = data[index].makanan_favorit;
+}
+
+function hapus(index){
+  if(confirm("Yakin mau hapus?")){
+    data.splice(index,1);
+    localStorage.setItem("orang", JSON.stringify(data));
+    tampil();
+  }
 }
 
 function lihat(index){
   localStorage.setItem("detail", index);
   window.location.href = "profil.html";
+}
+
+function resetForm(){
+  document.getElementById("indexEdit").value = "";
+  document.getElementById("nama").value = "";
+  document.getElementById("universitas").value = "";
+  document.getElementById("hobi").value = "";
+  document.getElementById("makanan favorit").value = "";
+  document.getElementById("fun fact").value = "";
 }
 
 tampil();
