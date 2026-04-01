@@ -1,241 +1,33 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Profil Saya</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    body {
-      background: linear-gradient(135deg, #141E30, #243B55);
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      overflow: hidden;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(15px);
-      padding: 30px;
-      border-radius: 25px;
-      width: 340px;
-      text-align: center;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-      animation: fadeIn 1.5s ease;
-      transition: 0.4s;
-    }
-
-    .card:hover {
-      transform: translateY(-10px) scale(1.03);
-    }
-
-    .profile-img {
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      border: 4px solid white;
-      margin-bottom: 15px;
-      object-fit: cover;
-      box-shadow: 0 0 25px rgba(255,255,255,0.7);
-    }
-
-    h2 {
-      margin-bottom: 5px;
-    }
-
-    .typing {
-      font-size: 14px;
-      height: 20px;
-      margin-bottom: 15px;
-    }
-
-    .info div {
-      margin: 8px 0;
-      padding: 10px;
-      background: rgba(255,255,255,0.15);
-      border-radius: 12px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .info div:hover {
-      background: rgba(255,255,255,0.3);
-      transform: translateX(5px);
-    }
-
-    button {
-      margin-top: 20px;
-      padding: 10px 25px;
-      border: none;
-      border-radius: 25px;
-      background: white;
-      color: #243B55;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #00c6ff;
-      color: white;
-    }
-
-    /* Popup */
-    .popup {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.7);
-      display: none;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .popup-content {
-      background: white;
-      color: black;
-      padding: 20px;
-      border-radius: 15px;
-      width: 300px;
-      text-align: center;
-      animation: fadeIn 0.5s;
-    }
-
-    .close {
-      margin-top: 10px;
-      padding: 8px 15px;
-      border: none;
-      background: red;
-      color: white;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0; transform: scale(0.8);}
-      to {opacity: 1; transform: scale(1);}
-    }
-
-  </style>
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="center">
 
-  <div class="card">
-    <img src="fotoku.jpg" class="profile-img">
+<div class="card">
+  <h2>🔐 Login</h2>
 
-    <h2>Ikram Mulia Alamsyah</h2>
-    <div class="typing" id="typing"></div>
+  <input type="text" id="user" placeholder="Username"><br>
+  <input type="password" id="pass" placeholder="Password"><br>
 
-    <div class="info">
-      <div onclick="showPopup('pendidikan')">🎓 Pendidikan</div>
-      <div onclick="showPopup('skill')">💻 Skill</div>
-      <div onclick="showPopup('hobi')">🎯 Hobi</div>
-      <div onclick="showPopup('fun fact')">🤓 fun fact</div>
-      <div onclick="showPopup('makanan favorit')">🍕 makanan favorit</div>
-      <div onclick="showPopup('lokasi')">📍 Lokasi</div>
-    </div>
+  <button onclick="login()">Masuk</button>
+</div>
 
-    <button onclick="showMessage()">Klik Aku</button>
-  </div>
+<script>
+function login(){
+  let u = document.getElementById("user").value;
+  let p = document.getElementById("pass").value;
 
-  <!-- POPUP -->
-  <div class="popup" id="popup">
-    <div class="popup-content">
-      <h3 id="popup-title"></h3>
-      <p id="popup-text"></p>
-      <button class="close" onclick="closePopup()">Tutup</button>
-    </div>
-  </div>
-
-  <script>
-    // Typing Effect
-    const text = ["Mahasiswa ", "Mas Duta Wisata Kebumen 🌐", "HR Enthusiast 🚀"];
-    let index = 0, charIndex = 0, currentText = "", isDeleting = false;
-
-    function typeEffect() {
-      if (index >= text.length) index = 0;
-
-      if (!isDeleting) {
-        currentText = text[index].substring(0, charIndex++);
-      } else {
-        currentText = text[index].substring(0, charIndex--);
-      }
-
-      document.getElementById("typing").innerHTML = currentText;
-
-      if (!isDeleting && charIndex === text[index].length) {
-        isDeleting = true;
-        setTimeout(typeEffect, 1000);
-        return;
-      }
-
-      if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        index++;
-      }
-
-      setTimeout(typeEffect, isDeleting ? 50 : 100);
-    }
-
-    typeEffect();
-
-    function showMessage() {
-      alert("Halo! Terima kasih sudah melihat profil saya 😄");
-    }
-
-    // Popup Data
-    function showPopup(type) {
-      let title = "";
-      let text = "";
-
-      if(type === "pendidikan") {
-        title = "🎓 Pendidikan";
-        text = "Saya merupakan mahasiswa jurusan Manajemen SDM di Universitas Negeri Semarang.";
-      }
-      if(type === "skill") {
-        title = "💻 Skill";
-        text = "Menguasai ngomong, melihat, merasakan, bergerak, berjalan, memasak dan bertahan hidup.";
-      }
-      if(type === "hobi") {
-        title = "🎯 Hobi";
-        text = "saya lebih suka menulis dan menyanyi.";
-      }
-      if(type === "fun fact") {
-        title = "🤓 fun fact";
-        text = "aku bisa kentut 100x sehari dan berak bisa melebihi manusia biasa.";
-      }
-      if(type === "makanan favorit") {
-        title = "🍕 makanan favorit";
-        text = "all food, batu, kayu, tanah kuburan basah, dan bata merah pun dia suka.";
-      }
-      if(type === "lokasi") {
-        title = "📍 Lokasi";
-        text = "SAMPING KUBURAN.";
-      }
-
-      document.getElementById("popup-title").innerHTML = title;
-      document.getElementById("popup-text").innerHTML = text;
-      document.getElementById("popup").style.display = "flex";
-    }
-
-    function closePopup() {
-      document.getElementById("popup").style.display = "none";
-    }
-  </script>
+  if(u === "admin" && p === "123"){
+    window.location.href = "dashboard.html";
+  } else {
+    alert("Username / Password salah!");
+  }
+}
+</script>
 
 </body>
 </html>
