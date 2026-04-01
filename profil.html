@@ -3,22 +3,80 @@
 <head>
   <title>Profil</title>
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    .profile-img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 25px rgba(255,255,255,0.7);
+      margin-bottom: 10px;
+    }
+
+    .typing {
+      font-size: 14px;
+      margin-bottom: 15px;
+      height: 20px;
+    }
+
+    .info div {
+      margin: 8px 0;
+      padding: 10px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .info div:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateX(5px);
+    }
+
+    /* Popup */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-content {
+      background: white;
+      color: black;
+      padding: 20px;
+      border-radius: 15px;
+      width: 300px;
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body class="center">
 
 <div class="card">
+  <img id="foto" class="profile-img">
   <h2 id="nama"></h2>
 
-  <div class="list-card" onclick="show('skill')">💻 Skill</div>
-  <div class="list-card" onclick="show('hobi')">🎯 Hobi</div>
+  <div class="typing" id="typing"></div>
+
+  <div class="info">
+    <div onclick="showPopup('skill')">💻 Skill</div>
+    <div onclick="showPopup('hobi')">🎯 Hobi</div>
+  </div>
 
   <button onclick="kembali()">Kembali</button>
 </div>
 
 <!-- POPUP -->
-<div id="popup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); justify-content:center; align-items:center;">
-  <div class="card">
+<div class="popup" id="popup">
+  <div class="popup-content">
     <h3 id="title"></h3>
     <p id="isi"></p>
     <button onclick="closePopup()">Tutup</button>
@@ -29,18 +87,56 @@
 let data = JSON.parse(localStorage.getItem("orang"));
 let index = localStorage.getItem("detail");
 
-document.getElementById("nama").innerHTML = data[index].nama;
+let user = data[index];
 
-function show(type){
-  let title="", isi="";
+// TAMPIL DATA
+document.getElementById("nama").innerHTML = user.nama;
+document.getElementById("foto").src = user.foto;
 
-  if(type=="skill"){
-    title="💻 Skill";
-    isi=data[index].skill;
+// TYPING EFFECT
+const text = ["Profil Pengguna 👤", "Data Diri 📄", "Interaktif 🔥"];
+let i = 0, j = 0, current = "", hapus = false;
+
+function typing(){
+  if(i >= text.length) i = 0;
+
+  if(!hapus){
+    current = text[i].substring(0, j++);
+  } else {
+    current = text[i].substring(0, j--);
   }
-  if(type=="hobi"){
-    title="🎯 Hobi";
-    isi=data[index].hobi;
+
+  document.getElementById("typing").innerHTML = current;
+
+  if(!hapus && j === text[i].length){
+    hapus = true;
+    setTimeout(typing, 1000);
+    return;
+  }
+
+  if(hapus && j === 0){
+    hapus = false;
+    i++;
+  }
+
+  setTimeout(typing, hapus ? 50 : 100);
+}
+
+typing();
+
+// POPUP
+function showPopup(type){
+  let title = "";
+  let isi = "";
+
+  if(type === "skill"){
+    title = "💻 Skill";
+    isi = user.skill;
+  }
+
+  if(type === "hobi"){
+    title = "🎯 Hobi";
+    isi = user.hobi;
   }
 
   document.getElementById("title").innerHTML = title;
