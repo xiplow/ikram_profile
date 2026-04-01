@@ -37,16 +37,18 @@ function tampil(){
   list.innerHTML = "";
 
   data.forEach((item,index)=>{
+    let fotoHTML = item.foto ? `<img src="${item.foto}" width="50" style="border-radius:50%">` : `<div style="width:50px;height:50px;border-radius:50%;background:#666;display:inline-block;"></div>`;
+    
     list.innerHTML += `
       <div class="list-card">
-        <img src="${item.foto}" width="50" style="border-radius:50%">
+        ${fotoHTML}
         👤 ${item.nama}
         <br>
         <button onclick="edit(${index})">Edit</button>
         <button onclick="hapus(${index})">Hapus</button>
         <button onclick="lihat(${index})">Lihat</button>
       </div>
-    `;
+     ;
   });
 }
 
