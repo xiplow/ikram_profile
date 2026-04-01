@@ -1,29 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-</head>
-<body>
-    <h1>Dashboard</h1>
-    <form>
-        <input type="text" id="nama" placeholder="Enter name"/>
-        <input type="text" id="hobi" placeholder="Enter hobby"/>
-        <input type="text" id="makanan_kesukaan" placeholder="Enter favorite food"/>
-        <input type="text" id="fun_fact" placeholder="Enter fun fact"/>
-        <button type="button" onclick="saveData()">Simpan</button>
-    </form>
-    <script>
-        function saveData() {
-            var nama = document.getElementById('nama').value;
-            var hobi = document.getElementById('hobi').value;
-            var makananKesukaan = document.getElementById('makanan_kesukaan').value;
-            var funFact = document.getElementById('fun_fact').value;
+  <title>Dashboard</title>
+  <style>
+    body {
+      font-family: Arial;
+      background:#f5f5f5;
+      padding:20px;
+    }
 
-            // Add your save logic here
-            console.log(nama, hobi, makananKesukaan, funFact);
-        }
-    </script>
+    input {
+      padding:8px;
+      margin:5px;
+    }
+
+    button {
+      padding:8px 15px;
+      cursor:pointer;
+    }
+
+    .card {
+      background:white;
+      padding:10px;
+      margin:10px 0;
+      border-radius:10px;
+      cursor:pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2>Tambah Data Orang</h2>
+
+<input type="text" id="nama" placeholder="Nama">
+<input type="text" id="hobi" placeholder="Hobi">
+<input type="text" id="makanan kesukaan" placeholder="Makanan Kesukaan">
+<input type="text" id="fun fact" placeholder="Fun Fact">
+<button onclick="tambah()">Tambah</button>
+
+<h2>Daftar Orang</h2>
+<div id="list"></div>
+
+<script>
+let data = JSON.parse(localStorage.getItem("orang")) || [];
+
+function tampil(){
+  let list = document.getElementById("list");
+  list.innerHTML = "";
+
+  data.forEach((item,index)=>{
+    list.innerHTML += `
+      <div class="card" onclick="lihat(${index})">
+        ${item.nama}
+      </div>
+    `;
+  });
+}
+
+function tambah(){
+  let nama = document.getElementById("nama").value;
+  let skill = document.getElementById("hobi").value;
+  let hobi = document.getElementById("makanan kesukaan").value;
+  let hobi = document.getElementById("fun fact").value;  
+
+  data.push({nama, skill, hobi});
+  localStorage.setItem("orang", JSON.stringify(data));
+
+  tampil();
+}
+
+function lihat(index){
+  localStorage.setItem("detail", index);
+  window.location.href = "profil.html";
+}
+
+tampil();
+</script>
+
 </body>
 </html>
