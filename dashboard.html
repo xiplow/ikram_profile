@@ -54,8 +54,8 @@ function simpan(){
   let nama = document.getElementById("nama").value;
   let universitas = document.getElementById("universitas").value;
   let hobi = document.getElementById("hobi").value;
-  let makanan_kesukaan = document.getElementById("makanan kesukaan").value;
-  let fun_fact = document.getElementById("fun fact").value;
+  let makanan_kesukaan = document.getElementById("Makanan Kesukaan").value;
+  let fun_fact = document.getElementById("Fun Fact").value;
   let file = document.getElementById("foto").files[0];
   let indexEdit = document.getElementById("indexEdit").value;
 
@@ -79,8 +79,8 @@ function simpan(){
         data[indexEdit].nama = nama;
         data[indexEdit].universitas = universitas;
         data[indexEdit].hobi = hobi;
-        data[indexEdit].makanan_favorit = makanan favorit;
-        data[indexEdit].fun_fact = fun fact;
+        data[indexEdit].makanan_favorit = Makanan Favorit;
+        data[indexEdit].fun_fact = Fun Fact;
       }
     }
 
@@ -92,11 +92,11 @@ function simpan(){
 
 function edit(index){
   document.getElementById("indexEdit").value = index;
-  document.getElementById("nama").value = data[index].nama;
-  document.getElementById("universitas").value = data[index].universitas;
-  document.getElementById("hobi").value = data[index].hobi;
-  document.getElementById("makanan favorit").value = data[index].makanan_favorit;
-  document.getElementById("fun fact").value = data[index].makanan_favorit;
+  document.getElementById("Nama").value = data[index].nama;
+  document.getElementById("Universitas").value = data[index].universitas;
+  document.getElementById("Hobi").value = data[index].hobi;
+  document.getElementById("Makanan Favorit").value = data[index].makanan_favorit;
+  document.getElementById("Fun Fact").value = data[index].makanan_favorit;
 }
 
 function hapus(index){
@@ -114,11 +114,11 @@ function lihat(index){
 
 function resetForm(){
   document.getElementById("indexEdit").value = "";
-  document.getElementById("nama").value = "";
-  document.getElementById("universitas").value = "";
-  document.getElementById("hobi").value = "";
-  document.getElementById("makanan favorit").value = "";
-  document.getElementById("fun fact").value = "";
+  document.getElementById("Nama").value = "";
+  document.getElementById("Universitas").value = "";
+  document.getElementById("Hobi").value = "";
+  document.getElementById("Makanan Favorit").value = "";
+  document.getElementById("fun Fact").value = "";
 }
 
 tampil();
