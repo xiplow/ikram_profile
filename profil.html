@@ -67,10 +67,10 @@
   <div class="typing" id="typing"></div>
 
   <div class="info">
-    <div onclick="showPopup('UNIVERSITAS')">👨🏻‍🎓 UNIVERSITAS</div>
-    <div onclick="showPopup('HOBI')">🎯 HOBI</div>
-    <div onclick="showPopup('MAKANAN KESUKAAN')">🍕 MAKANAN KESUKAAN</div>
-    <div onclick="showPopup('FUN FACT')">🤓 FUN FACT</div>
+    <div onclick="showPopup('Universitas')">👨🏻‍🎓 UNIVERSITAS</div>
+    <div onclick="showPopup('Hobi')">🎯 HOBI</div>
+    <div onclick="showPopup('Makanan Kesukaan')">🍕 MAKANAN KESUKAAN</div>
+    <div onclick="showPopup('Fun Fact')">🤓 FUN FACT</div>
   </div>
 
   <button onclick="kembali()">Kembali</button>
@@ -92,7 +92,7 @@ let index = localStorage.getItem("detail");
 let user = data[index];
 
 // TAMPIL DATA
-document.getElementById("nama").innerHTML = user.nama;
+document.getElementById("Nama").innerHTML = user.nama;
 document.getElementById("foto").src = user.foto;
 
 // TYPING EFFECT
@@ -131,22 +131,22 @@ function showPopup(type){
   let title = "";
   let isi = "";
 
-  if(type === "skill"){
-    title = "👨🏻‍🎓 UNIVERSITAS";
-    isi = user.skill;
+  if(type === "Universitas"){
+    title = "👨🏻‍🎓 Universitas";
+    isi = user.universitas;
   }
 
-  if(type === "hobi"){
-    title = "🎯 HOBI";
-    isi = user.HOBI;
+  if(type === "Hobi"){
+    title = "🎯 Hobi";
+    isi = user.hobi;
   }
-  if(type === "MAKANAN KESUKAAN"){
-    title = "🍕 MAKANAN KESUKAAN";
-    isi = user.MAKANAN_KESUKAAN;
+  if(type === "Makanan Kesukaan"){
+    title = "🍕 Makanan Kesukaan";
+    isi = user.makanan_kesukaan;
   }
-  if(type === "FUN FACT"){
-    title = "🤓 FUN FACT";
-    isi = user.FUN_FACT;
+  if(type === "Fun Fact"){
+    title = "🤓 Fun Fact";
+    isi = user.fun_fact;
   }
 
   document.getElementById("title").innerHTML = title;
