@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="center" style="flex-direction: column;">
+
+  <div class="card">
+    <h2>➕ Tambah Data</h2>
+
+    <input type="text" id="nama" placeholder="Nama"><br>
+    <input type="text" id="skill" placeholder="Skill"><br>
+    <input type="text" id="hobi" placeholder="Hobi"><br>
+
+    <button onclick="tambah()">Tambah</button>
+  </div>
+
+  <h2>👥 Daftar Orang</h2>
+  <div id="list"></div>
+
+</div>
+
+<script>
+let data = JSON.parse(localStorage.getItem("orang")) || [];
+
+function tampil(){
+  let list = document.getElementById("list");
+  list.innerHTML = "";
+
+  data.forEach((item,index)=>{
+    list.innerHTML += `
+      <div class="list-card" onclick="lihat(${index})">
+        👤 ${item.nama}
+      </div>
+    `;
+  });
+}
+
+function tambah(){
+  let nama = document.getElementById("nama").value;
+  let skill = document.getElementById("skill").value;
+  let hobi = document.getElementById("hobi").value;
+
+  data.push({nama, skill, hobi});
+  localStorage.setItem("orang", JSON.stringify(data));
+
+  tampil();
+}
+
+function lihat(index){
+  localStorage.setItem("detail", index);
+  window.location.href = "profil.html";
+}
+
+tampil();
+</script>
+
+</body>
+</html>
