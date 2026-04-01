@@ -10,13 +10,16 @@
 <div class="center" style="flex-direction: column;">
 
   <div class="card">
-    <h2>➕ Tambah Data</h2>
+    <h2>➕ Tambah / Edit Data</h2>
+
+    <input type="hidden" id="indexEdit">
 
     <input type="text" id="nama" placeholder="Nama"><br>
     <input type="text" id="skill" placeholder="Skill"><br>
     <input type="text" id="hobi" placeholder="Hobi"><br>
+    <input type="file" id="foto"><br>
 
-    <button onclick="tambah()">Tambah</button>
+    <button onclick="simpan()">Simpan</button>
   </div>
 
   <h2>👥 Daftar Orang</h2>
@@ -33,27 +36,79 @@ function tampil(){
 
   data.forEach((item,index)=>{
     list.innerHTML += `
-      <div class="list-card" onclick="lihat(${index})">
+      <div class="list-card">
+        <img src="${item.foto}" width="50" style="border-radius:50%">
         👤 ${item.nama}
+        <br>
+        <button onclick="edit(${index})">Edit</button>
+        <button onclick="hapus(${index})">Hapus</button>
+        <button onclick="lihat(${index})">Lihat</button>
       </div>
     `;
   });
 }
 
-function tambah(){
+function simpan(){
   let nama = document.getElementById("nama").value;
   let skill = document.getElementById("skill").value;
   let hobi = document.getElementById("hobi").value;
+  let file = document.getElementById("foto").files[0];
+  let indexEdit = document.getElementById("indexEdit").value;
 
-  data.push({nama, skill, hobi});
-  localStorage.setItem("orang", JSON.stringify(data));
+  if(file){
+    let reader = new FileReader();
+    reader.onload = function(e){
+      saveData(e.target.result);
+    }
+    reader.readAsDataURL(file);
+  } else {
+    saveData(null);
+  }
 
-  tampil();
+  function saveData(foto){
+    if(indexEdit === ""){
+      data.push({nama, skill, hobi, foto});
+    } else {
+      if(foto){
+        data[indexEdit] = {nama, skill, hobi, foto};
+      } else {
+        data[indexEdit].nama = nama;
+        data[indexEdit].skill = skill;
+        data[indexEdit].hobi = hobi;
+      }
+    }
+
+    localStorage.setItem("orang", JSON.stringify(data));
+    resetForm();
+    tampil();
+  }
+}
+
+function edit(index){
+  document.getElementById("indexEdit").value = index;
+  document.getElementById("nama").value = data[index].nama;
+  document.getElementById("skill").value = data[index].skill;
+  document.getElementById("hobi").value = data[index].hobi;
+}
+
+function hapus(index){
+  if(confirm("Yakin mau hapus?")){
+    data.splice(index,1);
+    localStorage.setItem("orang", JSON.stringify(data));
+    tampil();
+  }
 }
 
 function lihat(index){
   localStorage.setItem("detail", index);
   window.location.href = "profil.html";
+}
+
+function resetForm(){
+  document.getElementById("indexEdit").value = "";
+  document.getElementById("nama").value = "";
+  document.getElementById("skill").value = "";
+  document.getElementById("hobi").value = "";
 }
 
 tampil();
