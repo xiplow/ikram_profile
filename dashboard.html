@@ -14,9 +14,11 @@
 
     <input type="hidden" id="indexEdit">
 
-    <input type="text" id="nama" placeholder="Nama"><br>
-    <input type="text" id="skill" placeholder="Skill"><br>
-    <input type="text" id="hobi" placeholder="Hobi"><br>
+    <input type="text" id="nama" placeholder="NAMA"><br>
+    <input type="text" id="UNIVERSITAS" placeholder="UNIVERSITAS"><br>
+    <input type="text" id="SKILL" placeholder="SKILL"><br>
+    <input type="text" id="HOBI" placeholder="HOBI"><br>
+    <input type="text" id="FUN FACT" placeholder="FUN FACT"><br>
     <input type="file" id="foto"><br>
 
     <button onclick="simpan()">Simpan</button>
@@ -49,9 +51,11 @@ function tampil(){
 }
 
 function simpan(){
-  let nama = document.getElementById("nama").value;
-  let skill = document.getElementById("skill").value;
-  let hobi = document.getElementById("hobi").value;
+  let NAMA = document.getElementById("NAMA").value;
+  let UNIVERSITAS = document.getElementById("UNIVERSITAS").value;
+  let SKILL = document.getElementById("SKILL").value;
+  let HOBI = document.getElementById("HOBI").value;
+  let FUN_FACT = document.getElementById("FUN FACT").value;
   let file = document.getElementById("foto").files[0];
   let indexEdit = document.getElementById("indexEdit").value;
 
@@ -67,14 +71,16 @@ function simpan(){
 
   function saveData(foto){
     if(indexEdit === ""){
-      data.push({nama, skill, hobi, foto});
+      data.push({NAMA, UNIVERSITAS, SKILL, HOBI, FUN_FACT, foto});
     } else {
       if(foto){
-        data[indexEdit] = {nama, skill, hobi, foto};
+        data[indexEdit] = {NAMA, UNIVERSITAS, SKILL, HOBI, FUN_FACT, foto};
       } else {
-        data[indexEdit].nama = nama;
-        data[indexEdit].skill = skill;
-        data[indexEdit].hobi = hobi;
+        data[indexEdit].NNAMA = NAMA;
+        data[indexEdit].UNIVERSITAS = UNIVERSITAS;
+        data[indexEdit].SKILL = SKILL;
+        data[indexEdit].HOBI = HOBI;
+        data[indexEdit].FUN_FACT = FUN FACT;
       }
     }
 
@@ -86,9 +92,11 @@ function simpan(){
 
 function edit(index){
   document.getElementById("indexEdit").value = index;
-  document.getElementById("nama").value = data[index].nama;
-  document.getElementById("skill").value = data[index].skill;
-  document.getElementById("hobi").value = data[index].hobi;
+  document.getElementById("NAMA").value = data[index].NAMA;
+  document.getElementById("UNIVERSITAS").value = data[index].UNIVERSITAS;
+  document.getElementById("SKILL").value = data[index].SKILL;
+  document.getElementById("HOBI").value = data[index].HOBI;
+  document.getElementById("FUN FACT").value = data[index].FUN_FACT;
 }
 
 function hapus(index){
@@ -106,9 +114,11 @@ function lihat(index){
 
 function resetForm(){
   document.getElementById("indexEdit").value = "";
-  document.getElementById("nama").value = "";
-  document.getElementById("skill").value = "";
-  document.getElementById("hobi").value = "";
+  document.getElementById("NAMA").value = "";
+  document.getElementById("UNIVERSITAS").value = "";
+  document.getElementById("SKILL").value = "";
+  document.getElementById("HOBI").value = "";
+  document.getElementById("FUN FACT").value = "";
 }
 
 tampil();
