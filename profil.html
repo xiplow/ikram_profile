@@ -67,10 +67,10 @@
   <div class="typing" id="typing"></div>
 
   <div class="info">
-    <div onclick="showPopup('UNIVERSITAS')">💻 UNIVERSITAS</div>
+    <div onclick="showPopup('UNIVERSITAS')">👨🏻‍🎓 UNIVERSITAS</div>
     <div onclick="showPopup('HOBI')">🎯 HOBI</div>
-    <div onclick="showPopup('MAKANAN KESUKAAN')">💻 MAKANAN KESUKAAN</div>
-    <div onclick="showPopup('FUN FACT')">🎯 FUN FACT</div>
+    <div onclick="showPopup('MAKANAN KESUKAAN')">🍕 MAKANAN KESUKAAN</div>
+    <div onclick="showPopup('FUN FACT')">🤓 FUN FACT</div>
   </div>
 
   <button onclick="kembali()">Kembali</button>
@@ -132,7 +132,7 @@ function showPopup(type){
   let isi = "";
 
   if(type === "skill"){
-    title = "💻 UNIVERSITAS";
+    title = "👨🏻‍🎓 UNIVERSITAS";
     isi = user.skill;
   }
 
@@ -141,11 +141,11 @@ function showPopup(type){
     isi = user.HOBI;
   }
   if(type === "MAKANAN KESUKAAN"){
-    title = "💻 MAKANAN KESUKAAN";
+    title = "🍕 MAKANAN KESUKAAN";
     isi = user.MAKANAN_KESUKAAN;
   }
   if(type === "FUN FACT"){
-    title = "💻 FUN FACT";
+    title = "🤓 FUN FACT";
     isi = user.FUN_FACT;
   }
 
