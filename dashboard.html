@@ -1,128 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
 </head>
-
 <body>
+    <h1>Dashboard</h1>
+    <form>
+        <input type="text" id="nama" placeholder="Enter name"/>
+        <input type="text" id="hobi" placeholder="Enter hobby"/>
+        <input type="text" id="makanan_kesukaan" placeholder="Enter favorite food"/>
+        <input type="text" id="fun_fact" placeholder="Enter fun fact"/>
+        <button type="button" onclick="saveData()">Simpan</button>
+    </form>
+    <script>
+        function saveData() {
+            var nama = document.getElementById('nama').value;
+            var hobi = document.getElementById('hobi').value;
+            var makananKesukaan = document.getElementById('makanan_kesukaan').value;
+            var funFact = document.getElementById('fun_fact').value;
 
-<div class="center" style="flex-direction: column;">
-
-  <div class="card">
-    <h2>➕ Tambah / Edit Data</h2>
-
-    <input type="hidden" id="indexEdit">
-
-    <input type="text" id="NAMA" placeholder="NAMA"><br>
-    <input type="text" id="UNIVERSITAS" placeholder="UNIVERSITAS"><br>
-    <input type="text" id="HOBI" placeholder="HOBI"><br>
-    <input type="text" id="MAKANAN KESUKAAN" placeholder="MAKANAN KESUKAAN"><br>
-    <input type="text" id="FUN FACT" placeholder="FUN FACT"><br>
-    <input type="file" id="foto"><br>
-
-    <button onclick="submit">Simpan</button>
-  </div>
-
-  <h2>👥 Daftar Orang</h2>
-  <div id="list"></div>
-
-</div>
-
-<script>
-let data = JSON.parse(localStorage.getItem("orang")) || [];
-
-function tampil(){
-  let list = document.getElementById("list");
-  list.innerHTML = "";
-
-  data.forEach((item,index)=>{
-    list.innerHTML += `
-      <div class="list-card">
-        <img src="${item.foto}" width="50" style="border-radius:50%">
-        👤 ${item.nama}
-        <br>
-        <button onclick="edit(${index})">Edit</button>
-        <button onclick="hapus(${index})">Hapus</button>
-        <button onclick="lihat(${index})">Lihat</button>
-      </div>
-    `;
-  });
-}
-
-function simpan(){
-  let NAMA = document.getElementById("NAMA").value;
-  let UNIVERSITAS = document.getElementById("UNIVERSITAS").value;
-  let HOBI = document.getElementById("HOBI").value;
-  let MAKANAN_KESUKAAN = document.getElementById("MAKANAN KESUKAAN").value;
-  let FUN_FACT = document.getElementById("FUN FACT").value;
-  let file = document.getElementById("foto").files[0];
-  let indexEdit = document.getElementById("indexEdit").value;
-
-  if(file){
-    let reader = new FileReader();
-    reader.onload = function(e){
-      saveData(e.target.result);
-    }
-    reader.readAsDataURL(file);
-  } else {
-    saveData(null);
-  }
-
-  function saveData(foto){
-    if(indexEdit === ""){
-      data.push({NAMA, UNIVERSITAS, HOBI, MAKANAN_KESUKAAN, FUN_FACT, foto});
-    } else {
-      if(foto){
-        data[indexEdit] = {NAMA, UNIVERSITAS, HOBI, MAKANAN_KESUKAAN, FUN_FACT, foto};
-      } else {
-        data[indexEdit].NAMA = NAMA;
-        data[indexEdit].UNIVERSITAS = UNIVERSITAS;
-        data[indexEdit].HOBI = SKILL;
-        data[indexEdit].MAKANAN_KESUKAAN = HOBI;
-        data[indexEdit].FUN_FACT = FUN FACT;
-      }
-    }
-
-    localStorage.setItem("orang", JSON.stringify(data));
-    resetForm();
-    tampil();
-  }
-}
-
-function edit(index){
-  document.getElementById("indexEdit").value = index;
-  document.getElementById("NAMA").value = data[index].NAMA;
-  document.getElementById("UNIVERSITAS").value = data[index].UNIVERSITAS;
-  document.getElementById("HOBI").value = data[index].HOBI;
-  document.getElementById("MAKANAN KESUKAAN").value = data[index].MAKANAN_KESUKAAN;
-  document.getElementById("FUN FACT").value = data[index].FUN_FACT;
-}
-
-function hapus(index){
-  if(confirm("Yakin mau hapus?")){
-    data.splice(index,1);
-    localStorage.setItem("orang", JSON.stringify(data));
-    tampil();
-  }
-}
-
-function lihat(index){
-  localStorage.setItem("detail", index);
-  window.location.href = "profil.html";
-}
-
-function resetForm(){
-  document.getElementById("indexEdit").value = "";
-  document.getElementById("NAMA").value = "";
-  document.getElementById("UNIVERSITAS").value = "";
-  document.getElementById("HOBI").value = "";
-  document.getElementById("MAKANAN KESUKAAN").value = "";
-  document.getElementById("FUN FACT").value = "";
-}
-
-tampil();
-</script>
-
+            // Add your save logic here
+            console.log(nama, hobi, makananKesukaan, funFact);
+        }
+    </script>
 </body>
 </html>
