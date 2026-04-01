@@ -17,8 +17,8 @@
     <input type="text" id="nama" placeholder="Nama"><br>
     <input type="text" id="universitas" placeholder="Universitas"><br>
     <input type="text" id="hobi" placeholder="Hobi"><br>
-    <input type="text" id="makanan kesukaan" placeholder="Makanan Kesukaan"><br>
-    <input type="text" id="fun fact" placeholder="Fun Fact"><br>
+    <input type="text" id="makanan_kesukaan" placeholder="Makanan Kesukaan"><br>
+    <input type="text" id="fun_fact" placeholder="Fun Fact"><br>
     <input type="file" id="foto"><br>
 
     <button onclick="simpan()">Simpan</button>
@@ -54,8 +54,8 @@ function simpan(){
   let nama = document.getElementById("nama").value;
   let universitas = document.getElementById("universitas").value;
   let hobi = document.getElementById("hobi").value;
-  let makanan_kesukaan = document.getElementById("Makanan Kesukaan").value;
-  let fun_fact = document.getElementById("Fun Fact").value;
+  let makanan_kesukaan = document.getElementById("Makanan_Kesukaan").value;
+  let fun_fact = document.getElementById("Fun_Fact").value;
   let file = document.getElementById("foto").files[0];
   let indexEdit = document.getElementById("indexEdit").value;
 
@@ -76,9 +76,9 @@ function simpan(){
       if(foto){
         data[indexEdit] = {nama, universitas, hobi, makanan_favorit, fun_fact, foto};
       } else {
-        data[indexEdit].nama = nama;
-        data[indexEdit].universitas = universitas;
-        data[indexEdit].hobi = hobi;
+        data[indexEdit].nama = Nama;
+        data[indexEdit].universitas = Universitas;
+        data[indexEdit].hobi = Hobi;
         data[indexEdit].makanan_favorit = Makanan Favorit;
         data[indexEdit].fun_fact = Fun Fact;
       }
@@ -118,7 +118,7 @@ function resetForm(){
   document.getElementById("Universitas").value = "";
   document.getElementById("Hobi").value = "";
   document.getElementById("Makanan Favorit").value = "";
-  document.getElementById("fun Fact").value = "";
+  document.getElementById("Fun Fact").value = "";
 }
 
 tampil();
