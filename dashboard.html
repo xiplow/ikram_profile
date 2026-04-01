@@ -15,10 +15,8 @@
     <input type="hidden" id="indexEdit">
 
     <input type="text" id="nama" placeholder="Nama"><br>
-    <input type="text" id="universitas" placeholder="Universitas"><br>
+    <input type="text" id="skill" placeholder="Skill"><br>
     <input type="text" id="hobi" placeholder="Hobi"><br>
-    <input type="text" id="makanan_kesukaan" placeholder="Makanan Kesukaan"><br>
-    <input type="text" id="fun_fact" placeholder="Fun Fact"><br>
     <input type="file" id="foto"><br>
 
     <button onclick="simpan()">Simpan</button>
@@ -37,39 +35,23 @@ function tampil(){
   list.innerHTML = "";
 
   data.forEach((item,index)=>{
-    let fotoHTML = item.foto ? `<img src="${item.foto}" width="50" style="border-radius:50%">` : `<div style="width:50px;height:50px;border-radius:50%;background:#666;display:inline-block;"></div>`;
-    
     list.innerHTML += `
       <div class="list-card">
-        ${fotoHTML}
+        <img src="${item.foto}" width="50" style="border-radius:50%">
         👤 ${item.nama}
         <br>
         <button onclick="edit(${index})">Edit</button>
         <button onclick="hapus(${index})">Hapus</button>
         <button onclick="lihat(${index})">Lihat</button>
       </div>
-    `; // ✅ Perbaikan: Semicolon di tempat yang benar
+    `;
   });
 }
 
-// ✅ Tambahkan fungsi yang hilang
-function hapus(index){
-  data.splice(index, 1);
-  localStorage.setItem("orang", JSON.stringify(data));
-  resetForm();
-  tampil();
-}
-
-function lihat(index){
-  // Sesuaikan dengan kebutuhan Anda, misalnya:
-  alert(`Nama: ${data[index].nama}\nUniversitas: ${data[index].universitas}`);
-}
-  function simpan(){
+function simpan(){
   let nama = document.getElementById("nama").value;
-  let universitas = document.getElementById("universitas").value;
+  let skill = document.getElementById("skill").value;
   let hobi = document.getElementById("hobi").value;
-  let makanan_kesukaan = document.getElementById("makanan_kesukaan").value; // ✅ Fix
-  let fun_fact = document.getElementById("fun_fact").value; // ✅ Fix
   let file = document.getElementById("foto").files[0];
   let indexEdit = document.getElementById("indexEdit").value;
 
@@ -85,16 +67,14 @@ function lihat(index){
 
   function saveData(foto){
     if(indexEdit === ""){
-      data.push({nama, universitas, hobi, makanan_kesukaan, fun_fact, foto}); // ✅ Fix
+      data.push({nama, skill, hobi, foto});
     } else {
       if(foto){
-        data[indexEdit] = {nama, universitas, hobi, makanan_kesukaan, fun_fact, foto}; // ✅ Fix
+        data[indexEdit] = {nama, skill, hobi, foto};
       } else {
         data[indexEdit].nama = nama;
-        data[indexEdit].universitas = universitas;
+        data[indexEdit].skill = skill;
         data[indexEdit].hobi = hobi;
-        data[indexEdit].makanan_kesukaan = makanan_kesukaan; // ✅ Fix
-        data[indexEdit].fun_fact = fun_fact; // ✅ Fix
       }
     }
 
@@ -106,21 +86,31 @@ function lihat(index){
 
 function edit(index){
   document.getElementById("indexEdit").value = index;
-  document.getElementById("nama").value = data[index].nama; // ✅ Fix
-  document.getElementById("universitas").value = data[index].universitas; // ✅ Fix
-  document.getElementById("hobi").value = data[index].hobi; // ✅ Fix
-  document.getElementById("makanan_kesukaan").value = data[index].makanan_kesukaan; // ✅ Fix
-  document.getElementById("fun_fact").value = data[index].fun_fact; // ✅ Fix
+  document.getElementById("nama").value = data[index].nama;
+  document.getElementById("skill").value = data[index].skill;
+  document.getElementById("hobi").value = data[index].hobi;
+}
+
+function hapus(index){
+  if(confirm("Yakin mau hapus?")){
+    data.splice(index,1);
+    localStorage.setItem("orang", JSON.stringify(data));
+    tampil();
+  }
+}
+
+function lihat(index){
+  localStorage.setItem("detail", index);
+  window.location.href = "profil.html";
 }
 
 function resetForm(){
   document.getElementById("indexEdit").value = "";
   document.getElementById("nama").value = "";
-  document.getElementById("universitas").value = "";
+  document.getElementById("skill").value = "";
   document.getElementById("hobi").value = "";
-  document.getElementById("makanan_kesukaan").value = "";
-  document.getElementById("fun_fact").value = "";
 }
+
 tampil();
 </script>
 
