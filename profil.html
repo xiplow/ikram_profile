@@ -67,10 +67,8 @@
   <div class="typing" id="typing"></div>
 
   <div class="info">
-    <div onclick="showPopup('Universitas')">👨🏻‍🎓 UNIVERSITAS</div>
-    <div onclick="showPopup('Hobi')">🎯 HOBI</div>
-    <div onclick="showPopup('Makanan Kesukaan')">🍕 MAKANAN KESUKAAN</div>
-    <div onclick="showPopup('Fun Fact')">🤓 FUN FACT</div>
+    <div onclick="showPopup('skill')">💻 Skill</div>
+    <div onclick="showPopup('hobi')">🎯 Hobi</div>
   </div>
 
   <button onclick="kembali()">Kembali</button>
@@ -131,22 +129,14 @@ function showPopup(type){
   let title = "";
   let isi = "";
 
-  if(type === "Universitas"){
-    title = "👨🏻‍🎓 Universitas";
-    isi = user.universitas;
+  if(type === "skill"){
+    title = "💻 Skill";
+    isi = user.skill;
   }
 
-  if(type === "Hobi"){
+  if(type === "hobi"){
     title = "🎯 Hobi";
     isi = user.hobi;
-  }
-  if(type === "Makanan Kesukaan"){
-    title = "🍕 Makanan Kesukaan";
-    isi = user.makanan_kesukaan;
-  }
-  if(type === "Fun Fact"){
-    title = "🤓 Fun Fact";
-    isi = user.fun_fact;
   }
 
   document.getElementById("title").innerHTML = title;
