@@ -16,8 +16,8 @@
 
     <input type="text" id="nama" placeholder="NAMA"><br>
     <input type="text" id="UNIVERSITAS" placeholder="UNIVERSITAS"><br>
-    <input type="text" id="SKILL" placeholder="SKILL"><br>
     <input type="text" id="HOBI" placeholder="HOBI"><br>
+    <input type="text" id="MAKANAN KESUKAAN" placeholder="MAKANAN KESUKAAN"><br>
     <input type="text" id="FUN FACT" placeholder="FUN FACT"><br>
     <input type="file" id="foto"><br>
 
@@ -53,8 +53,8 @@ function tampil(){
 function simpan(){
   let NAMA = document.getElementById("NAMA").value;
   let UNIVERSITAS = document.getElementById("UNIVERSITAS").value;
-  let SKILL = document.getElementById("SKILL").value;
   let HOBI = document.getElementById("HOBI").value;
+  let MAKANAN_KESUKAAN = document.getElementById("MAKANAN KESUKAAN").value;
   let FUN_FACT = document.getElementById("FUN FACT").value;
   let file = document.getElementById("foto").files[0];
   let indexEdit = document.getElementById("indexEdit").value;
@@ -71,15 +71,15 @@ function simpan(){
 
   function saveData(foto){
     if(indexEdit === ""){
-      data.push({NAMA, UNIVERSITAS, SKILL, HOBI, FUN_FACT, foto});
+      data.push({NAMA, UNIVERSITAS, HOBI, MAKANAN_KESUKAAN, FUN_FACT, foto});
     } else {
       if(foto){
-        data[indexEdit] = {NAMA, UNIVERSITAS, SKILL, HOBI, FUN_FACT, foto};
+        data[indexEdit] = {NAMA, UNIVERSITAS, HOBI, MAKANAN_KESUKAAN, FUN_FACT, foto};
       } else {
-        data[indexEdit].NNAMA = NAMA;
+        data[indexEdit].NAMA = NAMA;
         data[indexEdit].UNIVERSITAS = UNIVERSITAS;
-        data[indexEdit].SKILL = SKILL;
-        data[indexEdit].HOBI = HOBI;
+        data[indexEdit].HOBI = SKILL;
+        data[indexEdit].MAKANAN_KESUKAAN = HOBI;
         data[indexEdit].FUN_FACT = FUN FACT;
       }
     }
@@ -94,8 +94,8 @@ function edit(index){
   document.getElementById("indexEdit").value = index;
   document.getElementById("NAMA").value = data[index].NAMA;
   document.getElementById("UNIVERSITAS").value = data[index].UNIVERSITAS;
-  document.getElementById("SKILL").value = data[index].SKILL;
   document.getElementById("HOBI").value = data[index].HOBI;
+  document.getElementById("MAKANAN KESUKAAN").value = data[index].MAKANAN_KESUKAAN;
   document.getElementById("FUN FACT").value = data[index].FUN_FACT;
 }
 
@@ -116,8 +116,8 @@ function resetForm(){
   document.getElementById("indexEdit").value = "";
   document.getElementById("NAMA").value = "";
   document.getElementById("UNIVERSITAS").value = "";
-  document.getElementById("SKILL").value = "";
   document.getElementById("HOBI").value = "";
+  document.getElementById("MAKANAN KESUKAAN").value = "";
   document.getElementById("FUN FACT").value = "";
 }
 
