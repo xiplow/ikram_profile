@@ -48,11 +48,23 @@ function tampil(){
         <button onclick="hapus(${index})">Hapus</button>
         <button onclick="lihat(${index})">Lihat</button>
       </div>
-     ';
+    `; // ✅ Perbaikan: Semicolon di tempat yang benar
   });
 }
 
-function simpan(){
+// ✅ Tambahkan fungsi yang hilang
+function hapus(index){
+  data.splice(index, 1);
+  localStorage.setItem("orang", JSON.stringify(data));
+  resetForm();
+  tampil();
+}
+
+function lihat(index){
+  // Sesuaikan dengan kebutuhan Anda, misalnya:
+  alert(`Nama: ${data[index].nama}\nUniversitas: ${data[index].universitas}`);
+}
+  function simpan(){
   let nama = document.getElementById("nama").value;
   let universitas = document.getElementById("universitas").value;
   let hobi = document.getElementById("hobi").value;
